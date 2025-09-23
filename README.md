@@ -21,8 +21,10 @@ docker-compose up --build
 - **Backend** → http://localhost:8080
 - **Frontend** → http://localhost:4200
 
-The backend exposes the H2 console at: http://localhost:8080/h2  
-(JDBC URL: `jdbc:h2:mem:taskdb`)
+The backend exposes the H2 console at: http://localhost:8080/h2 with
+- JDBC URL: jdbc:h2:mem:taskdb
+- Username: sa
+- Password: (empty)
 
 ## Frontend Usage
 
