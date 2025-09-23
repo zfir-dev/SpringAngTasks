@@ -19,7 +19,7 @@ server:
 
 app:
   jwt:
-    secret: "springangtaskssecretkey"
+    secret: "springangtaskssecretkeyforjwttoken256bitstrong"
     expirationMillis: 86400000 # 1 day
 
 logging:
