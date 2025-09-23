@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+  backend:
+    build: ./backend
+    container_name: springangtasks-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=default
+    networks:
+      - tasknet
+
+  # frontend:
+  #   build: ./frontend
+  #   container_name: springangtasks-frontend
+  #   ports:
+  #     - "4200:80"
+  #   depends_on:
+  #     - backend
+  #   networks:
+  #     - tasknet
+
+networks:
+  tasknet:
+    driver: bridge

@@ -1,0 +1,40 @@
+package dev.zfir.springangtasks.auth;
+
+import dev.zfir.springangtasks.security.JwtService;
+import dev.zfir.springangtasks.user.User;
+import dev.zfir.springangtasks.user.UserRepository;
+import jakarta.validation.Valid;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/auth")
+public class AuthController {
+    private final UserRepository users;
+    private final BCryptPasswordEncoder encoder;
+    private final JwtService jwt;
+
+    public AuthController(UserRepository users, BCryptPasswordEncoder encoder, JwtService jwt) {
+        this.users = users;
+        this.encoder = encoder;
+        this.jwt = jwt;
+    }
+
+    @PostMapping("/register")
+    public TokenResponse register(@Valid @RequestBody RegisterRequest req) {
+        if (users.existsByUsername(req.username())) throw new RuntimeException("Username taken");
+        User u = users.save(User.builder()
+                .username(req.username())
+                .passwordHash(encoder.encode(req.password()))
+                .build());
+        return new TokenResponse(jwt.generate(u.getUsername()));
+    }
+
+    @PostMapping("/login")
+    public TokenResponse login(@Valid @RequestBody LoginRequest req) {
+        User u = users.findByUsername(req.username())
+                .orElseThrow(() -> new RuntimeException("Invalid credentials"));
+        if (!encoder.matches(req.password(), u.getPasswordHash())) throw new RuntimeException("Invalid credentials");
+        return new TokenResponse(jwt.generate(u.getUsername()));
+    }
+}
