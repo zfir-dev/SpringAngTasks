@@ -28,3 +28,4 @@ logging:
   level:
     root: INFO
     dev.zfir.springangtasks: DEBUG
+    org.springframework.security: DEBUG
