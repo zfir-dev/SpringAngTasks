@@ -1,18 +1,18 @@
-<div class="p-card auth-card">
-  <h2>Register</h2>
+<div class="p-card auth-card p-p-4">
+  <h2 class="p-mb-4">Register</h2>
   <form (ngSubmit)="submit()" class="p-fluid">
-    <div class="p-field">
-      <label for="username">Username</label>
+    <div class="p-field p-mb-3">
+      <label for="username" class="p-mb-2">Username</label>
       <input id="username" pInputText [(ngModel)]="username" name="username" required />
     </div>
 
-    <div class="p-field">
-      <label for="password">Password</label>
+    <div class="p-field p-mb-3">
+      <label for="password" class="p-mb-2">Password</label>
       <input id="password" type="password" pInputText [(ngModel)]="password" name="password" required />
     </div>
 
-    <button pButton type="submit" label="Register" class="p-mt-3"></button>
-    <p *ngIf="error" class="error-message">{{ error }}</p>
+    <button pButton type="submit" label="Register" class="p-mt-3 p-mb-3"></button>
+    <p *ngIf="error" class="error-message p-mb-2">{{ error }}</p>
   </form>
 
   <p class="p-mt-3">Already have an account? <a routerLink="/login">Login</a></p>

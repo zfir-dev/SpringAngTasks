@@ -1,13 +1,15 @@
-<div class="p-card dashboard-card">
-  <h2>My Tasks</h2>
-  <button pButton label="Logout" (click)="logout()" class="p-button-danger p-mb-3 logout-button"></button>
+<div class="p-card dashboard-card p-p-4">
+  <div class="p-mb-4">
+    <h2 class="p-mb-3">My Tasks</h2>
+    <button pButton label="Logout" (click)="logout()" class="p-button-danger logout-button"></button>
+  </div>
 
   <!-- Create task form -->
-  <div class="p-fluid p-formgrid p-grid p-mb-3">
-    <div class="p-field p-col-12 p-md-5">
+  <div class="p-fluid p-formgrid p-grid p-mb-4">
+    <div class="p-field p-col-12 p-md-5 p-mb-2">
       <input pInputText placeholder="Title" [(ngModel)]="form.title" name="title" required />
     </div>
-    <div class="p-field p-col-12 p-md-5">
+    <div class="p-field p-col-12 p-md-5 p-mb-2">
       <input pInputText placeholder="Description" [(ngModel)]="form.description" name="description" />
     </div>
     <div class="p-field p-col-12 p-md-2">
