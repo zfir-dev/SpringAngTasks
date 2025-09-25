@@ -7,15 +7,17 @@
   </div>
 
   <!-- Create task form -->
-  <div class="p-fluid p-formgrid p-grid mb-2">
-    <div class="p-field p-col-12 p-md-5">
-      <input pInputText placeholder="Title" [(ngModel)]="form.title" name="title" required />
-    </div>
-    <div class="p-field p-col-12 p-md-5">
-      <input pInputText placeholder="Description" [(ngModel)]="form.description" name="description" />
-    </div>
-    <div class="p-field p-col-12 p-md-2">
-      <button pButton label="Add Task" (click)="create()" [disabled]="!form.title"></button>
+  <div class="p-fluid mb-2">
+    <div class="row g-2">
+      <div class="col-12 col-md-5">
+        <input pInputText placeholder="Title" [(ngModel)]="form.title" name="title" required />
+      </div>
+      <div class="col-12 col-md-5">
+        <input pInputText placeholder="Description" [(ngModel)]="form.description" name="description" />
+      </div>
+      <div class="col-12 col-md-2">
+        <button pButton label="Add Task" (click)="create()" [disabled]="!form.title"></button>
+      </div>
     </div>
   </div>
 
