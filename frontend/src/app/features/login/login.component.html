@@ -1,4 +1,4 @@
-<div class="p-card" style="max-width:400px;margin:auto;margin-top:50px;">
+<div class="p-card auth-card">
   <h2>Login</h2>
   <form (ngSubmit)="submit()" class="p-fluid">
     <div class="p-field">
@@ -12,7 +12,7 @@
     </div>
 
     <button pButton type="submit" label="Login" class="p-mt-3"></button>
-    <p *ngIf="error" style="color:red">{{ error }}</p>
+    <p *ngIf="error" class="error-message">{{ error }}</p>
   </form>
 
   <p class="p-mt-3">Don’t have an account? <a routerLink="/register">Register</a></p>
