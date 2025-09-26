@@ -11,15 +11,15 @@ services:
     networks:
       - tasknet
 
-  # frontend:
-  #   build: ./frontend
-  #   container_name: springangtasks-frontend
-  #   ports:
-  #     - "4200:80"
-  #   depends_on:
-  #     - backend
-  #   networks:
-  #     - tasknet
+  frontend:
+    build: ./frontend
+    container_name: springangtasks-frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+    networks:
+      - tasknet
 
 networks:
   tasknet:
