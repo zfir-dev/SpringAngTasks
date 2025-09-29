@@ -11,15 +11,26 @@ export class AuthService {
 
   login(username: string, password: string) {
     return this.http.post<{ token: string }>(`${environment.apiUrl}/auth/login`, { username, password })
-      .pipe(tap(res => localStorage.setItem(this.key, res.token)));
+      .pipe(tap(res => {
+        if (typeof localStorage !== 'undefined') {
+          localStorage.setItem(this.key, res.token);
+        }
+      }));
   }
 
   register(username: string, password: string) {
     return this.http.post<{ token: string }>(`${environment.apiUrl}/auth/register`, { username, password })
-      .pipe(tap(res => localStorage.setItem(this.key, res.token)));
+      .pipe(tap(res => {
+        if (typeof localStorage !== 'undefined') {
+          localStorage.setItem(this.key, res.token);
+        }
+      }));
   }
 
   get token(): string | null {
+    if (typeof localStorage === 'undefined') {
+      return null;
+    }
     return localStorage.getItem(this.key);
   }
 
@@ -28,6 +39,8 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem(this.key);
+    if (typeof localStorage !== 'undefined') {
+      localStorage.removeItem(this.key);
+    }
   }
 }
