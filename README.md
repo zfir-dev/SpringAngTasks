@@ -1,15 +1,15 @@
 # SpringAngTasks
 
-A simple Full Stack Task Manager built with:
-- **Spring Boot** (Java 17, JWT, H2, Spring Security) → Backend
-- **Angular** → Frontend  
-- **Docker Compose** → Run both apps together
+A modern full-stack task management application featuring:
+- **Backend**: Spring Boot (Java 17) with JWT authentication, H2 database, and Spring Security
+- **Frontend**: Angular 17 with PrimeNG UI components and responsive design
+- **Deployment**: Docker Compose for containerized development and deployment
 
 ## Getting Started
 
-### lone the Repository
+### Clone the Repository
 ```bash
-git clone https://github.com/<your-username>/SpringAngTasks.git
+git clone https://github.com/zfir-dev/SpringAngTasks.git
 cd SpringAngTasks
 ```
 
@@ -18,8 +18,9 @@ cd SpringAngTasks
 docker-compose up --build
 ```
 
-- **Backend** → http://localhost:8081
-- **Frontend** → http://localhost:4200
+Once running, access the application:
+- **Frontend (Angular)** → http://localhost:4200
+- **Backend API** → http://localhost:8081
 
 The backend exposes the H2 console at: http://localhost:8081/h2 with
 - JDBC URL: jdbc:h2:mem:taskdb
