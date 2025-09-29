@@ -1,17 +1,14 @@
 spring:
   datasource:
     url: jdbc:h2:mem:taskdb;DB_CLOSE_DELAY=-1
-    driver-class-name: org.h2.Driver
+    driverClassName: org.h2.Driver
     username: sa
     password: ''
-    
   jpa:
     hibernate:
       ddl-auto: update
     properties:
-      hibernate:
-        format_sql: true
-        
+      hibernate.format_sql: true
   h2:
     console:
       enabled: true
@@ -25,7 +22,7 @@ server:
 app:
   jwt:
     secret: "springangtaskssecretkeyforjwttoken256bitstrong"
-    expiration-millis: 86400000 # 1 day
+    expirationMillis: 86400000 # 1 day
 
 logging:
   level:
