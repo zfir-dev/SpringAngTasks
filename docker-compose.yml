@@ -5,7 +5,7 @@ services:
     build: ./backend
     container_name: springangtasks-backend
     ports:
-      - "8081:8081"
+      - "8081:80"
     environment:
       - SPRING_PROFILES_ACTIVE=default
     networks:
