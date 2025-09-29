@@ -30,5 +30,4 @@ app:
 logging:
   level:
     root: INFO
-    dev.zfir.springangtasks: DEBUG
-    org.springframework.security: DEBUG
+    dev.zfir.springangtasks: INFO
