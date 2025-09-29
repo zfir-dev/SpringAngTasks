@@ -15,13 +15,13 @@ import { AuthService } from '../../core/auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  username = ''; 
-  password = ''; 
+  username = '';
+  password = '';
   error = '';
 
   constructor(private auth: AuthService, private router: Router) {}
 
-  submit() {
+  submit(): void {
     this.auth.login(this.username, this.password).subscribe({
       next: () => this.router.navigate(['/']),
       error: () => this.error = 'Invalid credentials'

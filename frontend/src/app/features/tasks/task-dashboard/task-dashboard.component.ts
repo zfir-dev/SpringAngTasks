@@ -20,22 +20,24 @@ export class TaskDashboardComponent implements OnInit {
   tasks: Task[] = [];
   form = { title: '', description: '' };
 
-  constructor(private tasksApi: TaskService, private auth: AuthService) { }
+  constructor(private tasksApi: TaskService, private auth: AuthService) {}
 
-  ngOnInit() { this.load(); }
+  ngOnInit(): void {
+    this.load();
+  }
 
-  load() {
+  load(): void {
     this.tasksApi.list().subscribe(res => this.tasks = res);
   }
 
-  create() {
+  create(): void {
     this.tasksApi.create(this.form.title, this.form.description).subscribe(() => {
       this.form = { title: '', description: '' };
       this.load();
     });
   }
 
-  toggle(task: Task) {
+  toggle(task: Task): void {
     const updated: Task = {
       ...task,
       status: task.status === 'PENDING' ? 'COMPLETED' : 'PENDING' as TaskStatus
@@ -43,11 +45,11 @@ export class TaskDashboardComponent implements OnInit {
     this.tasksApi.update(updated).subscribe(() => this.load());
   }
 
-  delete(task: Task) {
+  delete(task: Task): void {
     this.tasksApi.remove(task.id).subscribe(() => this.load());
   }
 
-  logout() {
+  logout(): void {
     this.auth.logout();
     location.href = '/login';
   }

@@ -13,7 +13,7 @@ export interface Task {
 
 @Injectable({ providedIn: 'root' })
 export class TaskService {
-  private base = `${environment.apiUrl}/api/tasks`;
+  private readonly base = `${environment.apiUrl}/api/tasks`;
 
   constructor(private http: HttpClient) {}
 

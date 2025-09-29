@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
+
     private final UserRepository users;
     private final BCryptPasswordEncoder encoder;
     private final JwtService jwt;
@@ -22,19 +23,27 @@ public class AuthController {
 
     @PostMapping("/register")
     public TokenResponse register(@Valid @RequestBody RegisterRequest req) {
-        if (users.existsByUsername(req.username())) throw new RuntimeException("Username taken");
-        User u = users.save(User.builder()
+        if (users.existsByUsername(req.username())) {
+            throw new RuntimeException("Username taken");
+        }
+        
+        User user = users.save(User.builder()
                 .username(req.username())
                 .passwordHash(encoder.encode(req.password()))
                 .build());
-        return new TokenResponse(jwt.generate(u.getUsername()));
+        
+        return new TokenResponse(jwt.generate(user.getUsername()));
     }
 
     @PostMapping("/login")
     public TokenResponse login(@Valid @RequestBody LoginRequest req) {
-        User u = users.findByUsername(req.username())
+        User user = users.findByUsername(req.username())
                 .orElseThrow(() -> new RuntimeException("Invalid credentials"));
-        if (!encoder.matches(req.password(), u.getPasswordHash())) throw new RuntimeException("Invalid credentials");
-        return new TokenResponse(jwt.generate(u.getUsername()));
+        
+        if (!encoder.matches(req.password(), user.getPasswordHash())) {
+            throw new RuntimeException("Invalid credentials");
+        }
+        
+        return new TokenResponse(jwt.generate(user.getUsername()));
     }
 }

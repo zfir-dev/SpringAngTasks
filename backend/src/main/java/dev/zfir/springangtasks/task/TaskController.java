@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/tasks")
 public class TaskController {
+
     private final TaskRepository tasks;
     private final UserRepository users;
 
@@ -25,45 +26,53 @@ public class TaskController {
 
     @PostMapping
     public TaskResponse create(@Valid @RequestBody TaskCreateRequest req, Authentication auth) {
-        User u = currentUser(auth);
-        Task t = tasks.save(Task.builder()
+        User user = currentUser(auth);
+        Task task = tasks.save(Task.builder()
                 .title(req.title())
                 .description(req.description())
                 .status(TaskStatus.PENDING)
-                .user(u)
+                .user(user)
                 .build());
-        return TaskResponse.from(t);
+        
+        return TaskResponse.from(task);
     }
 
     @GetMapping
     public List<TaskResponse> myTasks(Authentication auth) {
-        return tasks.findByUser(currentUser(auth)).stream().map(TaskResponse::from).toList();
+        return tasks.findByUser(currentUser(auth))
+                .stream()
+                .map(TaskResponse::from)
+                .toList();
     }
 
     @GetMapping("/{id}")
     public TaskResponse getOne(@PathVariable Long id, Authentication auth) {
-        Task t = tasks.findByIdAndUser(id, currentUser(auth))
-                .orElseThrow(() -> new RuntimeException("Not found"));
-        return TaskResponse.from(t);
+        Task task = tasks.findByIdAndUser(id, currentUser(auth))
+                .orElseThrow(() -> new RuntimeException("Task not found"));
+        
+        return TaskResponse.from(task);
     }
 
     @PutMapping("/{id}")
     public TaskResponse update(@PathVariable Long id,
                                @Valid @RequestBody TaskUpdateRequest req,
                                Authentication auth) {
-        Task t = tasks.findByIdAndUser(id, currentUser(auth))
-                .orElseThrow(() -> new RuntimeException("Not found"));
-        t.setTitle(req.title());
-        t.setDescription(req.description());
-        t.setStatus(req.status());
-        tasks.save(t);
-        return TaskResponse.from(t);
+        Task task = tasks.findByIdAndUser(id, currentUser(auth))
+                .orElseThrow(() -> new RuntimeException("Task not found"));
+        
+        task.setTitle(req.title());
+        task.setDescription(req.description());
+        task.setStatus(req.status());
+        tasks.save(task);
+        
+        return TaskResponse.from(task);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id, Authentication auth) {
-        Task t = tasks.findByIdAndUser(id, currentUser(auth))
-                .orElseThrow(() -> new RuntimeException("Not found"));
-        tasks.delete(t);
+        Task task = tasks.findByIdAndUser(id, currentUser(auth))
+                .orElseThrow(() -> new RuntimeException("Task not found"));
+        
+        tasks.delete(task);
     }
 }

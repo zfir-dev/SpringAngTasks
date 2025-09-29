@@ -15,13 +15,13 @@ import { AuthService } from '../../core/auth.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
-  username = ''; 
-  password = ''; 
+  username = '';
+  password = '';
   error = '';
 
   constructor(private auth: AuthService, private router: Router) {}
 
-  submit() {
+  submit(): void {
     this.auth.register(this.username, this.password).subscribe({
       next: () => this.router.navigate(['/']),
       error: () => this.error = 'Registration failed'

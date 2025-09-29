@@ -5,7 +5,8 @@ import { tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private key = 'jwt';
+  private readonly key = 'jwt';
+
   constructor(private http: HttpClient) {}
 
   login(username: string, password: string) {
@@ -18,7 +19,15 @@ export class AuthService {
       .pipe(tap(res => localStorage.setItem(this.key, res.token)));
   }
 
-  get token(): string | null { return localStorage.getItem(this.key); }
-  isLoggedIn(): boolean { return !!this.token; }
-  logout() { localStorage.removeItem(this.key); }
+  get token(): string | null {
+    return localStorage.getItem(this.key);
+  }
+
+  isLoggedIn(): boolean {
+    return !!this.token;
+  }
+
+  logout(): void {
+    localStorage.removeItem(this.key);
+  }
 }
