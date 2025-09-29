@@ -1,5 +1,6 @@
-package dev.zfir.springangtas    @Override
-    protected void doFilterInternal(HttpServletRequest request,\n                                    HttpServletResponse response,\n                                    FilterChain chain) throws ServletException, IOException {\n        String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);\n        \n        if (authHeader != null && authHeader.startsWith(\"Bearer \")) {\n            try {\n                String token = authHeader.substring(7);\n                String username = jwtService.validateAndGetSubject(token);\n                \n                userRepository.findByUsername(username).ifPresent(user -> {\n                    Authentication auth = new UsernamePasswordAuthenticationToken(user, null, List.of());\n                    SecurityContextHolder.getContext().setAuthentication(auth);\n                });\n            } catch (Exception e) {\n                // Invalid token, continue without authentication\n            }\n        }\n        \n        chain.doFilter(request, response);\n    }port dev.zfir.springangtasks.user.User;
+package dev.zfir.springangtasks.security;
+
+import dev.zfir.springangtasks.user.User;
 import dev.zfir.springangtasks.user.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
