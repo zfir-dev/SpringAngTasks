@@ -54,7 +54,8 @@ public class SecurityConfig {
         configuration.setAllowedOrigins(Arrays.asList(
             "http://localhost:4200", 
             "http://localhost:3000",
-            "https://spring-ang-tasks.fr.infra.zfir.dev"
+            "https://spring-ang-tasks.fr.infra.zfir.dev",
+            "https://api.spring-ang-tasks.fr.infra.zfir.dev"
         ));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
